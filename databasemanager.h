@@ -52,6 +52,8 @@ private:
     explicit DatabaseManager(QObject *parent = nullptr);
     Q_DISABLE_COPY(DatabaseManager)
 
+    static QString hashPassword(const QString &plaintext);
+
     QSqlDatabase m_db;
     QString      m_lastError;
 };

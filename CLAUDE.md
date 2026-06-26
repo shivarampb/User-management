@@ -72,6 +72,15 @@ Singleton, wraps a single `QSqlDatabase` (default connection). All public method
 
 The only table is `userdetails (Username VARCHAR PK, Password VARCHAR, Privilege INT)`.
 
-## Known limitation
+## Password hashing
 
-Passwords are stored in **plaintext** by design (matches the given schema). The `Password` column is `VARCHAR(255)` specifically to accommodate a future hash. To add hashing, update `DatabaseManager::addUser`, `changePassword`, `authenticate`, and `verifyPassword`.
+Passwords are hashed with **SHA3-256 (NIST FIPS 202)** via `QCryptographicHash::RealSha3_256` and stored as a 64-character lowercase hex string. The private helper `DatabaseManager::hashPassword()` is the single call site — it is applied in `addUser`, `changePassword`, `authenticate`, and `verifyPassword`. Never pass a plaintext password directly to a SQL bind value.
+
+The seed `dev` account in `schema.sql` already stores the pre-computed hash of `dev123`. If you need to seed additional accounts manually, hash the password first:
+```python
+import hashlib; print(hashlib.sha3_256(b"yourpassword").hexdigest())
+```
+
+## UI theming
+
+A global QSS stylesheet is applied in `main.cpp` (`kAppStyle`). Widget-level `styleSheet` properties in `.ui` files are used only for elements that cannot be targeted by class/id selectors in the global sheet (e.g., the blue header frames and white-on-blue labels inside them). Edit `kAppStyle` in `main.cpp` to change colours, fonts, or spacing globally.

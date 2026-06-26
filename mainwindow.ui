@@ -6,79 +6,235 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>470</height>
+    <width>880</width>
+    <height>580</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>480</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>User Management System</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="rootLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <widget class="QLabel" name="currentUserLabel">
-      <property name="text">
-       <string>Logged in as:</string>
+     <!-- ── Header bar ─────────────────────────────────────── -->
+     <widget class="QFrame" name="headerFrame">
+      <property name="minimumHeight">
+       <number>56</number>
       </property>
+      <property name="maximumHeight">
+       <number>56</number>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame { background-color: #1a73e8; border: none; }</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QHBoxLayout" name="headerLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>16</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="appTitleLabel">
+         <property name="text">
+          <string>User Management System</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #ffffff; font-size: 16px; font-weight: bold; background: transparent;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="headerSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="currentUserLabel">
+         <property name="text">
+          <string>Logged in as:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignVCenter</set>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgba(255,255,255,0.90); font-size: 12px; background: transparent;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="logoutButton">
+         <property name="text">
+          <string>Logout</string>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="tableHintLabel">
-      <property name="text">
-       <string>Select a user to update or delete:</string>
-      </property>
+     <!-- ── Content area ───────────────────────────────────── -->
+     <widget class="QWidget" name="contentWidget">
+      <layout class="QVBoxLayout" name="contentLayout">
+       <property name="spacing">
+        <number>14</number>
+       </property>
+       <property name="leftMargin">
+        <number>24</number>
+       </property>
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>20</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="tableHintLabel">
+         <property name="text">
+          <string>Select a user to update or delete:</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #5f6368; font-size: 12px;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="userTable">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="showGrid">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <!-- ── Action buttons ─────────────────────────────── -->
+        <layout class="QHBoxLayout" name="buttonLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="addButton">
+           <property name="text">
+            <string>+ Add User</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="updateButton">
+           <property name="text">
+            <string>Edit User</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deleteButton">
+           <property name="text">
+            <string>Delete User</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="changePasswordButton">
+           <property name="text">
+            <string>Change Password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="actionSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="refreshButton">
+           <property name="text">
+            <string>Refresh</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton { color: #5f6368; } QPushButton:hover { color: #1a73e8; border-color: #1a73e8; }</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
-    </item>
-    <item>
-     <widget class="QTableWidget" name="userTable"/>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="buttonLayout">
-      <item>
-       <widget class="QPushButton" name="addButton">
-        <property name="text">
-         <string>Add User</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="updateButton">
-        <property name="text">
-         <string>Update User</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="deleteButton">
-        <property name="text">
-         <string>Delete User</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="changePasswordButton">
-        <property name="text">
-         <string>Change Password</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="refreshButton">
-        <property name="text">
-         <string>Refresh</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>
+  <!-- ── Menu bar ──────────────────────────────────────────── -->
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
+     <width>880</width>
      <height>22</height>
     </rect>
    </property>

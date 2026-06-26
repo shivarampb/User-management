@@ -26,9 +26,7 @@ MainWindow::MainWindow(const QString &username, int privilege, QWidget *parent)
     ui->userTable->setColumnCount(2);
     ui->userTable->setHorizontalHeaderLabels(QStringList() << tr("Username") << tr("Role"));
     ui->userTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->userTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->userTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->userTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->userTable->verticalHeader()->setVisible(false);
 
     // --- Menu actions ---
     connect(ui->actionAddUser,        &QAction::triggered, this, &MainWindow::onAddUser);
@@ -44,6 +42,7 @@ MainWindow::MainWindow(const QString &username, int privilege, QWidget *parent)
     connect(ui->deleteButton,         &QPushButton::clicked, this, &MainWindow::onDeleteUser);
     connect(ui->changePasswordButton, &QPushButton::clicked, this, &MainWindow::onChangePassword);
     connect(ui->refreshButton,        &QPushButton::clicked, this, &MainWindow::refreshUserList);
+    connect(ui->logoutButton,         &QPushButton::clicked, this, &MainWindow::onLogout);
 
     applyPermissions();
     refreshUserList();
