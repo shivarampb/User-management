@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>User Management System</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="currentUserLabel">
+      <property name="text">
+       <string>Logged in as:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="tableHintLabel">
+      <property name="text">
+       <string>Select a user to update or delete:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="userTable"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <item>
+       <widget class="QPushButton" name="addButton">
+        <property name="text">
+         <string>Add User</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="updateButton">
+        <property name="text">
+         <string>Update User</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="text">
+         <string>Delete User</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="changePasswordButton">
+        <property name="text">
+         <string>Change Password</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="refreshButton">
+        <property name="text">
+         <string>Refresh</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <widget class="QMenu" name="menuUserManagement">
+     <property name="title">
+      <string>User Management</string>
+     </property>
+     <addaction name="actionAddUser"/>
+     <addaction name="actionUpdateUser"/>
+     <addaction name="actionDeleteUser"/>
+     <addaction name="separator"/>
+     <addaction name="actionChangePassword"/>
+    </widget>
+    <addaction name="menuUserManagement"/>
+    <addaction name="separator"/>
+    <addaction name="actionRefresh"/>
+    <addaction name="actionLogout"/>
+   </widget>
+   <addaction name="menuSettings"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAddUser">
+   <property name="text">
+    <string>Add User</string>
+   </property>
+  </action>
+  <action name="actionUpdateUser">
+   <property name="text">
+    <string>Update User</string>
+   </property>
+  </action>
+  <action name="actionDeleteUser">
+   <property name="text">
+    <string>Delete User</string>
+   </property>
+  </action>
+  <action name="actionChangePassword">
+   <property name="text">
+    <string>Change Password</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionLogout">
+   <property name="text">
+    <string>Logout</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
