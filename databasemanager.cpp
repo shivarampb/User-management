@@ -1,9 +1,17 @@
 #include "databasemanager.h"
 
+#include <QCryptographicHash>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QStringList>
 #include <QVariant>
+
+QString DatabaseManager::hashPassword(const QString &plaintext)
+{
+    const QByteArray hash = QCryptographicHash::hash(
+        plaintext.toUtf8(), QCryptographicHash::RealSha3_256);
+    return QString::fromLatin1(hash.toHex());
+}
 
 DatabaseManager &DatabaseManager::instance()
 {
@@ -54,7 +62,7 @@ bool DatabaseManager::authenticate(const QString &username, const QString &passw
     QSqlQuery q(m_db);
     q.prepare("SELECT Privilege FROM userdetails WHERE Username = :u AND Password = :p");
     q.bindValue(":u", username);
-    q.bindValue(":p", password);
+    q.bindValue(":p", hashPassword(password));
     if (!q.exec()) {
         m_lastError = q.lastError().text();
         return false;
@@ -72,7 +80,7 @@ bool DatabaseManager::verifyPassword(const QString &username, const QString &pas
     QSqlQuery q(m_db);
     q.prepare("SELECT COUNT(*) FROM userdetails WHERE Username = :u AND Password = :p");
     q.bindValue(":u", username);
-    q.bindValue(":p", password);
+    q.bindValue(":p", hashPassword(password));
     if (!q.exec() || !q.next()) {
         m_lastError = q.lastError().text();
         return false;
@@ -148,7 +156,7 @@ bool DatabaseManager::addUser(const QString &username, const QString &password, 
     QSqlQuery q(m_db);
     q.prepare("INSERT INTO userdetails (Username, Password, Privilege) VALUES (:u, :p, :pr)");
     q.bindValue(":u", username);
-    q.bindValue(":p", password);
+    q.bindValue(":p", hashPassword(password));
     q.bindValue(":pr", privilege);
     if (!q.exec()) {
         m_lastError = q.lastError().text();
@@ -189,7 +197,7 @@ bool DatabaseManager::changePassword(const QString &username, const QString &new
 {
     QSqlQuery q(m_db);
     q.prepare("UPDATE userdetails SET Password = :p WHERE Username = :u");
-    q.bindValue(":p", newPassword);
+    q.bindValue(":p", hashPassword(newPassword));
     q.bindValue(":u", username);
     if (!q.exec()) {
         m_lastError = q.lastError().text();

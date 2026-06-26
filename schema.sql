@@ -14,9 +14,11 @@ CREATE TABLE IF NOT EXISTS userdetails (
 );
 
 -- Seed one Developer so you can log in the first time.
+-- Credentials: dev / dev123
+-- Password is stored as SHA3-256 (RealSha3_256) hex digest.
 -- IMPORTANT: change this password immediately after first login.
 INSERT INTO userdetails (Username, Password, Privilege)
-VALUES ('dev', 'dev123', 0)
+VALUES ('dev', '53db5d7ef3f1a5d3492b07097933d1b0a5304a5c324aca9fdde9730c9787d24a', 0)
 ON DUPLICATE KEY UPDATE Username = Username;
 
 -- Optional sample accounts for testing:
